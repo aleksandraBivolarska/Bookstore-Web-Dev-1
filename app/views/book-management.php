@@ -9,7 +9,7 @@ include __DIR__ . '/navigation-bar.php';
 <section class="container-fluid">
     <div class="container text-center py-50">
     <div class="d-flex justify-content-between align-items-center mb-3">
-    <h1 class="text-center m-0 flex-grow-1">Book Catalogue</h1>
+    <h1 class="text-start m-0 flex-grow-1">Book Catalogue</h1>
     <a href="/createBook" class="button-green" role="button">Create Book</a>
 </div>
         <div class="table-responsive">

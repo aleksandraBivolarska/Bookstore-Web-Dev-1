@@ -10,6 +10,7 @@ if (isset($_SESSION['user'])) {
     // Unserialize the session data into an object
     $user = unserialize($_SESSION['user']);
     $userRole = $user['role'];
+    $userId = $user['user_id'];
 
     if($userRole === 'admin'){
       $isUserAdmin = true;

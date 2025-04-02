@@ -4,36 +4,38 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 include __DIR__ . '/header.php';
 include __DIR__ . '/navigation-bar.php';
+
 ?>
-
-
 
 <?php if (!$isUserAdmin): ?>
     <section class="container-fluid order-background image-headers">
-    <div class="container text-center">
-        
-    </div>
-</section>        
+        <div class="container text-center">
+            
+        </div>
+    </section>        
 <?php endif; ?>
 
 <?php if (!$isUserAdmin): ?>
-    <h1 class="text-center py-50">Previous Orders</h1>    
+    <h1 class="text-center py-50">My Orders</h1>    
 <?php endif; ?>
 
 <?php if ($isUserAdmin): ?>
 <section class="container-fluid">
     <div class="container">
         <!-- Search and Filter Section -->
-        <div class="row justify-content-center mb-4">
-            <div class="col-md-8">
-                <div class="card p-3 filter-card">
-                    <div class="row">
+        <div class="row justify-content-between">
+        <div class="col-md-6 pt-5">
+            <h1>Orders Overview</h1>
+        </div>
+            <div class="col-md-6">
+                <div class="card pt-5 filter-card">
+                    <div class="row justify-content-end p-0 m-0 ">
                         <!-- Keyword Search -->
-                        <div class="col-md-6 mb-3 mb-md-0">
+                         
+                        <div class="col-md-8">
                             <div class="form-group filtration">
-                                <label for="keywordSearch"><b>Search Orders</b></label>
                                 <input type="text" id="keywordSearch" class="form-control" 
-                                       placeholder="Customer name, book title...">
+                                       placeholder="Search Orders By Customer Name">
                             </div>
                         </div>
                     </div>
@@ -44,16 +46,16 @@ include __DIR__ . '/navigation-bar.php';
 </section>
 <?php endif; ?>
 
-
 <section class="container-fluid">
     <div class="container">
-        
         <!-- Orders Table -->
         <div class="table-responsive">
             <table class="table table-striped" id="ordersTable">
                 <thead class="thead-dark">
                     <tr>
-                        <th>Customer</th>
+                        <?php if ($isUserAdmin): ?>
+                            <th>Customer</th>
+                        <?php endif; ?>
                         <th>Book Title</th>
                         <th>Author</th>
                         <th>Quantity</th>
@@ -71,50 +73,72 @@ include __DIR__ . '/navigation-bar.php';
     let allOrders = []; // Store all orders for filtering
     
     function loadOrders() {
-        fetch('/api/orders')
-            .then(response => response.json())
-            .then(orders => {
-                allOrders = orders; // Store all orders
-                displayOrders(orders); // Display all orders initially
-            })
-            .catch(error => console.error("Error loading orders:", error));
+        <?php if ($isUserAdmin): ?>
+            // Admin can see all orders
+            fetch('/api/orders')
+                .then(response => response.json())
+                .then(orders => {
+                    allOrders = orders;
+                    displayOrders(orders);
+                })
+                .catch(error => console.error("Error loading orders:", error));
+        <?php else: ?>
+            // Regular user can only see their own orders
+            fetch('/api/orders/<?php echo $userId; ?>')
+                .then(response => response.json())
+                .then(orders => {
+                    allOrders = orders;
+                    displayOrders(orders);
+                })
+                .catch(error => console.error("Error loading user orders:", error));
+        <?php endif; ?>
     }
 
     function displayOrders(orders) {
         const tableBody = document.getElementById("ordersTableBody");
         tableBody.innerHTML = '';
         
-        // Display each order
         orders.forEach(order => {
             const row = document.createElement("tr");
-            row.innerHTML = `
-                <td>${order.user_first_name} ${order.user_last_name}</td>
-                <td>${order.book_title}</td>
-                <td>${order.book_author}</td>
-                <td>${order.quantity}</td>
-            `;
+            <?php if ($isUserAdmin): ?>
+                row.innerHTML = `
+                    <td>${order.user_first_name} ${order.user_last_name}</td>
+                    <td>${order.book_title}</td>
+                    <td>${order.book_author}</td>
+                    <td>${order.quantity}</td>
+                `;
+            <?php else: ?>
+                row.innerHTML = `
+                    <td>${order.book_title}</td>
+                    <td>${order.book_author}</td>
+                    <td>${order.quantity}</td>
+                `;
+            <?php endif; ?>
             tableBody.appendChild(row);
         });
     }
 
-    function filterOrders() {
-        const searchTerm = document.getElementById('keywordSearch').value.toLowerCase();
-        
-        let filteredOrders = allOrders;
-        
-        if (searchTerm) {
-            filteredOrders = allOrders.filter(order => 
-                order.first_name.toLowerCase().includes(searchTerm) || 
-                order.title.toLowerCase().includes(searchTerm) ||
-                order.author.toLowerCase().includes(searchTerm)
-            );
+    <?php if ($isUserAdmin): ?>
+        function filterOrders() {
+            const searchTerm = document.getElementById('keywordSearch').value.toLowerCase();
+            
+            let filteredOrders = allOrders;
+            
+            if (searchTerm) {
+                filteredOrders = allOrders.filter(order => 
+                    (order.user_first_name && order.user_first_name.toLowerCase().includes(searchTerm)) || 
+                    (order.user_last_name && order.user_last_name.toLowerCase().includes(searchTerm))
+                );
+            }
+            
+            displayOrders(filteredOrders);
         }
-        
-        displayOrders(filteredOrders);
-    }
 
-    // Initialize
-    document.getElementById('keywordSearch').addEventListener('input', filterOrders);
+        // Initialize filter for admin only
+        document.getElementById('keywordSearch').addEventListener('input', filterOrders);
+        <?php endif; ?>
+
+    // Load orders when page loads
     loadOrders();
 </script>
 

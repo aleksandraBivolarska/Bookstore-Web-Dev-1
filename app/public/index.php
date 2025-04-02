@@ -89,6 +89,11 @@ switch ($page) {
             $controller = new OrderControllerAPI();
             $controller->orders();
             break;
+        case (preg_match('/^\/api\/orders\/\d+$/', $page) ? true : false):
+            require_once "../api/OrderControllerAPI.php";
+            $controller = new OrderControllerAPI();
+            $controller->customerOrders();
+            break;
         default:
             // Handle 404 error
             http_response_code(404);
