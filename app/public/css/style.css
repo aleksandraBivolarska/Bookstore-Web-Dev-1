@@ -1,0 +1,186 @@
+.dahsboard-header{
+    background-image: url('../imgs/dashboard-header1.jpeg');
+}
+
+.store-background{
+    background-image: url('../imgs/store-background.jpg');
+}
+
+.order-background{
+    background-image: url('https://revival-strapi.s3.eu-west-2.amazonaws.com/Untitled_design_2024_04_18_T163538_610_02fb7e7bad.png');
+}
+
+.image-headers{
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    color: white;
+    height: 350px;
+}
+
+.nav-link, .dropdown-item{
+    color:#fff !important;
+    font-size: 20px !important;
+}
+
+.dropdown-item:hover{
+    color: #1d1915 !important;
+}
+
+.navbar-toggler-icon {
+    background-image: url('../imgs/menu-icon.png') !important;
+    width: 40px !important;
+    height: 40px !important;
+  }
+  
+.dashboard-images{
+    max-height: 500px;
+}
+
+/* paddings and margin */
+.py-50{
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.pt-50{
+    padding-top: 50px;
+}
+
+.py-100{
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+/* Color schemes */
+
+.bg-organic{
+    background-color: #6a6f4c;
+}
+
+.bg-butter{
+    background-color: #cbb89d;
+}
+
+.bg-coconut{
+    background-color: #ede1d2
+}
+
+.bg-natural{
+    background-color: #806044;
+}
+
+.bg-cocoa{
+    background-color: #412f26;
+}
+
+.bg-zeus{
+    background-color: #1d1915 !important;
+}
+
+.color-white{
+    color: #fff !important;
+}
+
+.card{
+    background-color: transparent !important;
+    border: 0px !important;
+}
+
+.btn-add-to-cart{
+    padding: 12px 20px !important;
+    background-color: #6a6f4c !important;
+    color: white !important;
+    font-size: 16px !important;
+}
+
+.card-image {
+    height: 200px !important; 
+    object-fit: contain !important;
+    width: 100%; 
+    display: block; 
+}
+
+.card-title{
+    height: 50px;
+}
+
+.card-author{
+    height: 40px;
+}
+
+footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background-color: #1d1915;
+    color: white ;
+  }
+
+
+.bg-login{
+        top: 0px;
+        left: 0;
+        z-index: -99999;
+        width: 100%;
+        height: 93.5vh;
+        text-align: center;
+        background-image: url('../imgs/login-bg.jpg');
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        color: white;
+}
+
+.login-form, .book-management-form{
+    display: inline-block;
+    width: 60%;
+}
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0 20px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+
+  .button-green {
+    padding: 12px 50px !important;
+    background-color: #6a6f4c !important;
+    color: white !important;
+    font-size: 24px !important;
+    border: none !important;
+    font-weight: 500;
+    margin-top: 20px;
+    text-decoration: none;
+  }
+
+  .book-management-form .form-group {
+    text-align: start;
+}
+
+.book-management-form input,
+.book-management-form select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 768px){
+    
+}
