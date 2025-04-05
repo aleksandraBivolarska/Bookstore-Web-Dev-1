@@ -16,7 +16,6 @@ include __DIR__ . '/navigation-bar.php';
             <table class="table table-striped text-center">
                 <thead class="custom-header">
                     <tr>
-                        <th class="color-white" scope="col">ID</th>
                         <th class="color-white" scope="col">Title</th>
                         <th class="color-white" scope="col">Author</th>
                         <th class="color-white" scope="col">Genre</th>
@@ -73,7 +72,6 @@ include __DIR__ . '/navigation-bar.php';
         const priceCol = document.createElement("td");
 
         idCol.scope = "row";
-        idCol.innerText = `${book.book_id}`;
         titleCol.innerText = book.title;
         authorCol.innerText = book.author;
         genreCol.innerText = book.genre;
@@ -132,7 +130,6 @@ include __DIR__ . '/navigation-bar.php';
         actionsCol.appendChild(editButton);
         actionsCol.appendChild(deleteButton);
 
-        newRow.appendChild(idCol);
         newRow.appendChild(titleCol);
         newRow.appendChild(authorCol);
         newRow.appendChild(genreCol);
