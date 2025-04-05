@@ -49,19 +49,10 @@ if (isset($_SESSION['user'])) {
 
        
         <?php if (!$isUserAdmin): ?>
-          <li class="nav-item dropdown px-3 bg-zeus">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              My Orders
-            </a>
-            
-            <ul class="dropdown-menu bg-zeus">
-              <li><a class="dropdown-item" href="shopping-cart">Shopping Cart</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="order">Past Orders</a></li>
-            </ul>
-          </li>
-
-          <?php endif; ?>
+            <li class="nav-item px-3">
+              <a class="nav-link active" aria-current="page" href="order">My Orders</a>
+            </li>
+        <?php endif; ?>
 
           <?php if ($isUserAdmin): ?>
             <li class="nav-item px-3">

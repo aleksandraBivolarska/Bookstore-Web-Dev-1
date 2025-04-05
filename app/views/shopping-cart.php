@@ -148,6 +148,55 @@ include __DIR__ . '/navigation-bar.php';
     
     // Load cart items when page loads
     loadCartItems();
+
+    // Add this to your shopping-cart view's script section
+document.getElementById('checkoutBtn').addEventListener('click', () => {
+    const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    
+    if (cartItems.length === 0) {
+        alert('Your cart is empty!');
+        return;
+    }
+
+    // Prepare the data to send
+    const orderData = {
+        items: cartItems.map(item => ({
+            book_id: item.book_id,
+            quantity: item.quantity
+        }))
+    };
+
+    // Send the order to the server
+    fetch('/api/orders/create', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(orderData)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to create order');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.success) {
+            // Clear the cart after successful order
+            localStorage.removeItem('cart');
+            updateCartCount();
+            
+            // Redirect to a thank you page or orders page
+            window.location.href = '/order';
+        } else {
+            throw new Error('Order creation failed');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('There was an error processing your order. Please try again.');
+    });
+});
 </script>
 
 <!-- Add Font Awesome for the icons -->

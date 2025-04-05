@@ -9,7 +9,7 @@ include __DIR__ . '/navigation-bar.php';
 <section class="container-fluid">
     <div class="container text-center py-50">
     <div class="d-flex justify-content-between align-items-center mb-3">
-    <h1 class="text-start m-0 flex-grow-1">Book Catalogue</h1>
+    <h1 class="text-start m-0 flex-grow-1">Book Management</h1>
     <a href="/createBook" class="button-green" role="button">Create Book</a>
 </div>
         <div class="table-responsive">
@@ -80,7 +80,7 @@ include __DIR__ . '/navigation-bar.php';
         authorCol.innerText = book.author;
         genreCol.innerText = book.genre;
         availabilityCol.innerText = `${book.stock}`; // Assuming 'availability' is a boolean
-        priceCol.innerText = `$${book.price}`;
+        priceCol.innerText = `€${book.price}`;
 
         // Create the Actions column and apply styles
         const actionsCol = document.createElement("td");

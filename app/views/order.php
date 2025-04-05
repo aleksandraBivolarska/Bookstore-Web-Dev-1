@@ -16,7 +16,7 @@ include __DIR__ . '/navigation-bar.php';
 <?php endif; ?>
 
 <?php if (!$isUserAdmin): ?>
-    <h1 class="text-center py-50">My Orders</h1>    
+    <h1 class="text-center pt-4">My Orders</h1>    
 <?php endif; ?>
 
 <?php if ($isUserAdmin): ?>
@@ -46,7 +46,7 @@ include __DIR__ . '/navigation-bar.php';
 </section>
 <?php endif; ?>
 
-<section class="container-fluid">
+<section class="container-fluid pt-4 pb-5">
     <div class="container">
         <!-- Orders Table -->
         <div class="table-responsive">

@@ -61,11 +61,11 @@ switch ($page) {
             $controller->store();
             break;
        
-        case (preg_match('/^\/api\/books\/deleteBook\/\d+$/', $page) ? true : false):
-            require_once "../api/BookControllerAPI.php";
-            $controller = new BookControllerAPI();
-            $controller->deleteBook();
-            break;
+            case (preg_match('/^\/api\/books\/deleteBook\/\d+$/', $page) ? true : false):
+                require_once "../api/BookControllerAPI.php";
+                $controller = new BookControllerAPI();
+                $controller->deleteBook();
+                break;
 
         case "/api/books/addBook":
             require_once "../api/BookControllerAPI.php";
@@ -89,6 +89,11 @@ switch ($page) {
             $controller = new OrderControllerAPI();
             $controller->orders();
             break;
+            case (preg_match('/^\/api\/orders\/create\/\d+$/', $page) ? true : false):
+                require_once "../api/OrderControllerAPI.php";
+                $controller = new OrderControllerAPI();
+                $controller->createOrder();
+                break;
         case (preg_match('/^\/api\/orders\/\d+$/', $page) ? true : false):
             require_once "../api/OrderControllerAPI.php";
             $controller = new OrderControllerAPI();

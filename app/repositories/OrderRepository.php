@@ -93,14 +93,18 @@ class OrderRepository extends BaseRepository {
 
     function createOrder($order) {
         try {
+            // Ensure quantity is always 1
+            $quantity = 1;
+            
             $stmt = $this->connection->prepare(
                 "INSERT INTO `order`(`order_id`, `user_id`, `book_id`, `quantity`) 
                 VALUES (NULL, :user_id, :book_id, :quantity)"
             );
-    
-            $stmt->bindParam(":user_id", $order->getUserId());
-            $stmt->bindParam(":book_id", $order->getBookId());
-            $stmt->bindParam(":quantity", $order->getQuantity());
+            $user_id = $order->getUserId();
+            $book_id = $order->getBookId();
+            $stmt->bindParam(":user_id", $user_id);
+            $stmt->bindParam(":book_id", $book_id);
+            $stmt->bindParam(":quantity", $quantity); // Use the fixed quantity
     
             $stmt->execute();
             return $this->connection->lastInsertId();

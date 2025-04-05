@@ -37,37 +37,33 @@ class BookControllerAPI
         echo json_encode(["error" => "Method Not Allowed"]);
         exit();
     }
-
-
+    
     function deleteBook() {
+        // Set headers
         header("Access-Control-Allow-Origin: *");
         header("Content-Type: application/json; charset=UTF-8");
         header("Access-Control-Allow-Methods: DELETE, OPTIONS");
+        header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
     
-        // Handle preflight request
-        if ($_SERVER["REQUEST_METHOD"] == "OPTIONS") {
+        // Handle preflight OPTIONS request
+        if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
             http_response_code(200);
             exit();
         }
     
-        if ($_SERVER["REQUEST_METHOD"] == "DELETE") {
-            // Extract ID from URL
-            $uri = $_SERVER['REQUEST_URI'];
-            $parts = explode('/', $uri);
-            $book_id = end($parts);
-            
-            if (is_numeric($book_id)) {
-                $this->service->deleteBook($book_id);
-                http_response_code(200);
-                echo json_encode(array("message" => "Book was deleted."));
-            } else {
-                http_response_code(400);
-                echo json_encode(array("message" => "Invalid book ID."));
-            }
-        } else {
+        // Only allow DELETE method
+        if ($_SERVER['REQUEST_METHOD'] != 'DELETE') {
             http_response_code(405);
-            echo json_encode(array("message" => "Method Not Allowed"));
+            echo json_encode(["message" => "Method Not Allowed"]);
+            exit();
         }
+    
+        // Get book ID from URL
+        $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $uriParts = explode('/', $uri);
+        $book_id = (int)end($uriParts);
+    
+        $this->service->deleteBook($book_id);
     }
 
     public function addBook()
