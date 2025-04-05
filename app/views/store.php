@@ -3,12 +3,10 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-// Include necessary files
 require_once __DIR__ . '/../services/OrderService.php';
 include __DIR__ . '/header.php';
 include __DIR__ . '/navigation-bar.php';
 
-// Handle form submission for adding to cart
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     if (!isset($_SESSION['user'])) {
         echo "<script>alert('You must be logged in to add items to cart');</script>";
@@ -24,11 +22,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
             $result = $orderService->createOrder($order);
             
             if ($result) {
-                echo "<script>alert('Book added to cart successfully!');</script>";
                 $_SESSION['cart_count'] = ($_SESSION['cart_count'] ?? 0) + 1;
-                
-                // Reload books to reflect stock changes
-                echo "<script>loadBooks();</script>";
+                echo "<script>alert('Book added to cart successfully! Redirecting you to your orders...'); window.location.href = '/order';</script>";
+                exit();
             } else {
                 echo "<script>alert('Failed to add book to cart - may be out of stock');</script>";
             }

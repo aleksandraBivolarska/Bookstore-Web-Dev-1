@@ -2,7 +2,7 @@
 $page = $_SERVER['REQUEST_URI'];
 
 switch ($page) {
-    case"/":
+    
     case "/dashboard":
         case"/home":
             require_once "../Controllers/DashboardController.php";
@@ -12,6 +12,7 @@ switch ($page) {
 
         case"/view/login":
         case"/login":
+        case"/":
             require_once "../Controllers/LoginController.php";
             $controller = new LoginController();
             if (isset($_POST['username']) && isset($_POST['password'])) {

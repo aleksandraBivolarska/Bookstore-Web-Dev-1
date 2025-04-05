@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Apr 05, 2025 at 09:11 AM
+-- Generation Time: Apr 05, 2025 at 08:21 PM
 -- Server version: 10.9.4-MariaDB-1:10.9.4+maria~ubu2204
 -- PHP Version: 8.0.25
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `bookstore`
 --
+CREATE DATABASE IF NOT EXISTS `bookstore` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `bookstore`;
 
 -- --------------------------------------------------------
 
@@ -96,7 +98,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `first_name`, `last_name`, `email`, `password`, `role`) VALUES
-(1, 'John', 'Admin', 'admin@email.com', '$2y$10$cnUq4cqM2bl48nuj6uH6S.3d7dYJ6hPDPruDDIHhwmJo9VtOgu7V.', 'admin'),
+(1, 'Dan', 'Admin', 'admin@email.com', '$2y$10$cnUq4cqM2bl48nuj6uH6S.3d7dYJ6hPDPruDDIHhwmJo9VtOgu7V.', 'admin'),
 (2, 'Vanessa', 'Customer', 'customer@email.com', '$2y$10$kEAkNXFdz5aJAKE5Oy7xrO4D1PtpcTi9eJdoedSYvdo3jBQeprWFS', 'customer'),
 (3, 'Lili', 'Smith', 'ls@tsemail.com', 'pass123', 'customer'),
 (4, 'Tom', 'Smith', 'ts@email.com', 'pass234', 'customer');
