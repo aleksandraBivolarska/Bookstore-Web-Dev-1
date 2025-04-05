@@ -16,7 +16,6 @@ class CreateBookController extends BaseController
         // For new book creation
         require __DIR__ . '/../views/create-book.php';
     }
-
-  
+ 
 }
 ?>

@@ -21,9 +21,7 @@ class LoginController
     {
         $validatedUser = $this->userService->validateUser($email, $password);
         if ($validatedUser != null) {
-            // Serialize the object
             $userSerialized = serialize($validatedUser);
-            // Store the serialized object in a session variable
             $_SESSION['user'] = $userSerialized;
             
             require_once "../views/dashboard.php";
@@ -32,25 +30,17 @@ class LoginController
             require_once "../views/login.php";
         }
 
-        // Output JavaScript code to remove the message after 3 seconds
         echo '<script>
             setTimeout(function(){
                 document.getElementById("message").style.display = "none";
-            }, 3000);
+            }, 5000);
           </script>';
     }
 
-
     public function logout(): void
     {
-        // Clear all session variables
         $_SESSION = array();
-        
-        // Destroy the session
         session_destroy();
-        
-        // Clear the cart from localStorage (this will be handled by JavaScript)
-        // Redirect to login page
         header("Location: /login");
         exit();
     }

@@ -3,7 +3,6 @@
 <?php 
 include __DIR__ . '/header.php';
 ?>
-
     <section class="container-fluid py-100">
         <div class="container">
             <div class="row justify-content-center">
@@ -12,7 +11,6 @@ include __DIR__ . '/header.php';
                         Login to your account
                     </h1>
 
-                    <!-- to do  -->
                     <form action="/login" method="post" class="pt-4 px-5">
                     <div>
                         <label for="username"><b>Username</b></label>

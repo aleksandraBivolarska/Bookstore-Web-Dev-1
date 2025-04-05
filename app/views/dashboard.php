@@ -9,10 +9,8 @@ require_once '../models/user.php';
 
 
 if (isset($_SESSION['user'])) {
-    // Unserialize the session data into an object
     $user = unserialize($_SESSION['user']);
     $userName = $user['first_name'];
-
 }
 ?>
 

@@ -14,6 +14,5 @@ class DashboardController extends BaseController
         require __DIR__ . '/../views/dashboard.php';
     }
 
-    
 }
 ?>

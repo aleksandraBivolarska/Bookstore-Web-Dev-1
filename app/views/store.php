@@ -47,12 +47,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
 
 <section class="container-fluid">
     <div class="container text-center">
-        <!-- Search and Filter Section -->
-        <div class="row justify-content-center mb-4">
+        <div class="row justify-content-center mb-4 mt-4">
             <div class="col-md-8">
                 <div class="p-3 filter-card">
                     <div class="row">
-                        <!-- Keyword Search -->
                         <div class="col-md-6 pe-4">
                             <div class="form-group filtration">
                                 <label for="keywordSearch"><b>Search Books</b></label>
@@ -60,7 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
                                        placeholder="Title, author, etc...">
                             </div>
                         </div>
-                        
                         <!-- Genre Filter -->
                         <div class="col-md-6 ps-4">
                             <div class="form-group filtration">
@@ -92,23 +89,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
 </section>
 
 <script>
-    let allBooks = []; // Store all books for filtering
+    let allBooks = []; 
     
     function loadBooks() {
         fetch('/api/books')
             .then(response => response.json())
             .then(books => {
-                allBooks = books; // Store all books
-                displayBooks(books); // Display all books initially
+                allBooks = books; 
+                displayBooks(books); 
             })
             .catch(error => console.error("Error loading books:", error));
     }
 
     function displayBooks(books) {
-        // Clear current books
         document.getElementById("bookCardsContainer").innerHTML = '';
         
-        // Display each book
         books.forEach(book => {
             appendBook(book);
         });
@@ -121,7 +116,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
         bookCard.setAttribute('data-title', book.title.toLowerCase());
         bookCard.setAttribute('data-author', book.author.toLowerCase());
 
-        // Display with Add to cart button when available
         let actionHtml = '';
         if (book.stock <= 0) {
             actionHtml = `<div class="text-muted mt-2 out-of-stock">Out of Stock</div>`;
@@ -174,7 +168,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
         displayBooks(filteredBooks);
     }
 
-    // Initialize
     document.getElementById('genreFilter').addEventListener('change', filterBooks);
     document.getElementById('keywordSearch').addEventListener('input', filterBooks);
     loadBooks();

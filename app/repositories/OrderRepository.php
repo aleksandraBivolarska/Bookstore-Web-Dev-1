@@ -21,7 +21,6 @@ class OrderRepository extends BaseRepository {
                 JOIN book b ON o.book_id = b.book_id"
             );
             $stmt->execute();
-    
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $ordersArray = $stmt->fetchAll();
     
@@ -38,7 +37,6 @@ class OrderRepository extends BaseRepository {
                     $orderData['quantity']
                 );
             }
-
             return $orders;
         } catch (PDOException $e) {
             error_log("Error in getAllOrders: " . $e->getMessage());
@@ -66,7 +64,6 @@ class OrderRepository extends BaseRepository {
             
             $stmt->bindParam(':user_id', $user_id);
             $stmt->execute();
-    
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $ordersArray = $stmt->fetchAll();
     
@@ -93,7 +90,6 @@ class OrderRepository extends BaseRepository {
 
     function createOrder($order) {
         try {
-            // Ensure quantity is always 1
             $quantity = 1;
             
             $stmt = $this->connection->prepare(
@@ -104,7 +100,7 @@ class OrderRepository extends BaseRepository {
             $book_id = $order->getBookId();
             $stmt->bindParam(":user_id", $user_id);
             $stmt->bindParam(":book_id", $book_id);
-            $stmt->bindParam(":quantity", $quantity); // Use the fixed quantity
+            $stmt->bindParam(":quantity", $quantity); 
     
             $stmt->execute();
             return $this->connection->lastInsertId();

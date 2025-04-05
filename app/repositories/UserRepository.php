@@ -23,7 +23,6 @@ class UserRepository extends BaseRepository{
         $stmt = $this->connection->prepare("SELECT * FROM `user` WHERE user_id = :user_id");
         $stmt->bindParam(':user_id', $user_id);
         $stmt->execute();
-
         $stmt->setFetchMode(PDO::FETCH_CLASS, 'user');
         $user = $stmt->fetch();
 
@@ -31,34 +30,28 @@ class UserRepository extends BaseRepository{
     }
 
     function validateUser($email, $password)
-{
-    try {
-        // Prepare and execute the query to fetch the user by email
-        $stmt = $this->connection->prepare("SELECT user_id, first_name, last_name, email, role, password FROM `user` WHERE email = :email");
-        $stmt->bindParam(':email', $email);
-        $stmt->execute();
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT user_id, first_name, last_name, email, role, password FROM `user` WHERE email = :email");
+            $stmt->bindParam(':email', $email);
+            $stmt->execute();
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            if (!$user) {
+                return null;
+            }
 
-        // Fetch the user data as an associative array
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        
-        // Check if user exists first
-        if (!$user) {
+            if ($this->isPasswordValid($password , $user['password'])) {
+            return $user;
+            } else {
+                return null;
+            }
+        } catch (PDOException $e) {
+            echo $e;
             return null;
         }
-        // Now safely check the password
-        if ($this->isPasswordValid($password , $user['password'])) {
-        return $user;
-        } else {
-            // Invalid credentials
-            return null;
-        }
-    } catch (PDOException $e) {
-        echo $e;
-        return null;
     }
-}
 
-    // Method to fetch the user by email
     public function getUserByEmail($email)
     {
         $stmt = $this->connection->prepare("SELECT user_id, first_name, last_name, email, role, password FROM `user` WHERE email = :email");
@@ -69,7 +62,6 @@ class UserRepository extends BaseRepository{
         return $stmt->fetch();
     }
 
-    // Method to verify the password
     private function isPasswordValid($inputPassword, $storedPassword)
     {
         return password_verify($inputPassword, $storedPassword);

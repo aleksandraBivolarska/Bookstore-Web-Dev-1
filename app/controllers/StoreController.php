@@ -12,8 +12,6 @@ class StoreController extends BaseController
     public function store()
     {
         require __DIR__ . '/../views/store.php';
-    }
-
-    
+    } 
 }
 ?>

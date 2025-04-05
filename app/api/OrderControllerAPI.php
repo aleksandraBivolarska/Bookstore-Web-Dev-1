@@ -83,7 +83,6 @@ class OrderControllerAPI
             exit();
         }
         
-        
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             try {
                 // Get bookId from URL
@@ -96,24 +95,16 @@ class OrderControllerAPI
                     echo json_encode(["error" => "Invalid book ID"]);
                     exit();
                 }
-                
-                
                 if (!isset($_SESSION['user'])) {
                     http_response_code(401);
                     echo json_encode(["error" => "User not logged in"]);
                     exit();
                 }
-    
                 $user = unserialize($_SESSION['user']);
                 $user_id = $user['user_id'];
                 $quantity = 1;
-    
-                // Create order object
                 $order = new Order(null, $user_id, null, null, $book_id, null, null, $quantity);
-    
-                // Call service to create order
                 $order_id = $this->service->createOrder($order);
-    
                 if ($order_id) {
                     http_response_code(201);
                     echo json_encode(["message" => "Book added to cart successfully", "order_id" => $order_id]);
@@ -127,7 +118,6 @@ class OrderControllerAPI
             }
             exit();
         }
-    
         http_response_code(405);
         echo json_encode(["error" => "Method Not Allowed"]);
         exit();

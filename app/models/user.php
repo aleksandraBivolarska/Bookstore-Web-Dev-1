@@ -28,7 +28,6 @@ class User implements JsonSerializable
         $this->role = $role;
     }
 
-
     public function getUserId(): int
     {
         return $this->user_id;

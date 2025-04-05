@@ -22,22 +22,16 @@ class OrderService{
 
     public function createOrder($order) {
         try {
-            // Start transaction
-            // $this->orderRepository->beginTransaction();
-            
-            // 1. Check stock availability
             $book = $this->bookRepository->getBookById($order->getBookId());
             if (!$book || $book->getStock() <= 0) {
                 throw new Exception("Book is out of stock");
             }
             
-            // 2. Create the order
             $orderId = $this->orderRepository->createOrder($order);
             if (!$orderId) {
                 throw new Exception("Failed to create order");
             }
             
-            // 3. Update book stock (decrement by 1)
             $book->setStock($book->getStock() - 1);
             $this->bookRepository->editBook($book);
             

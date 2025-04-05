@@ -8,12 +8,9 @@ class BookRepository extends BaseRepository{
         try {
             $stmt = $this->connection->prepare("SELECT book_id, title, author, genre, stock, price, image FROM book");
             $stmt->execute();
-    
-            // Fetch as associative arrays first
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $booksArray = $stmt->fetchAll();
     
-            // Manually create Book objects from associative arrays
             $books = [];
             foreach ($booksArray as $bookData) {
                 $books[] = new Book(
@@ -23,29 +20,24 @@ class BookRepository extends BaseRepository{
                     $bookData['genre'],
                     $bookData['stock'],
                     $bookData['price'],
-                    $bookData['image'] // Assuming 'image' exists in the query result
+                    $bookData['image'] 
                 );
             }
-    
             return $books;
         } catch (PDOException $e) {
             echo $e;
         }
     }
     
-
     function getBookById($book_id) {
         try {
             $stmt = $this->connection->prepare("SELECT book_id, title, author, genre, stock, price, image FROM book WHERE book_id = :book_id");
             $stmt->bindParam(':book_id', $book_id);
             $stmt->execute();
-    
-            // Fetch as associative array first
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $bookData = $stmt->fetch();
     
             if ($bookData) {
-                // Manually create Book object from associative array
                 return new Book(
                     $bookData['book_id'],
                     $bookData['title'],
@@ -57,21 +49,19 @@ class BookRepository extends BaseRepository{
                 );
             }
     
-            return null; // Return null if no book found
+            return null;
         } catch (PDOException $e) {
             echo $e;
             return null;
         }
     }
-
     function createBook($book){
         try{
             $stmt = $this->connection->prepare(
                 "INSERT INTO `book`(`book_id`, `title`, `author`, `genre`, `stock`, `price`, `image`) 
                         VALUES (NULL, :title, :author, :genre, :stock, :price, :img)
             ");
-    
-            // Store getter results in variables first
+
             $title = $book->getTitle();
             $author = $book->getAuthor();
             $genre = $book->getGenre();
@@ -79,7 +69,6 @@ class BookRepository extends BaseRepository{
             $price = $book->getPrice();
             $image = $book->getImageUrl();
     
-            // Now bind the variables
             $stmt->bindParam(":title", $title);
             $stmt->bindParam(":author", $author);
             $stmt->bindParam(":genre", $genre);
@@ -100,7 +89,7 @@ class BookRepository extends BaseRepository{
                 SET title = :title, author = :author, genre = :genre, stock = :stock, price = :price, image = :image 
                 WHERE book_id = :book_id"
             );
-            // Store getter results in variables first
+
             $book_id = $updated_book->getBookId();
             $title = $updated_book->getTitle();
             $author = $updated_book->getAuthor();
@@ -109,14 +98,13 @@ class BookRepository extends BaseRepository{
             $price = $updated_book->getPrice();
             $image = $updated_book->getImageUrl();
     
-            // Now bind the variables
             $stmt->bindParam(":book_id", $book_id);
             $stmt->bindParam(":title", $title);
             $stmt->bindParam(":author", $author);
             $stmt->bindParam(":genre", $genre);
             $stmt->bindParam(":stock", $stock);
             $stmt->bindParam(":price", $price);
-            $stmt->bindParam(":image", $image); // Changed from :img to :image to match SQL
+            $stmt->bindParam(":image", $image); 
     
             $stmt->execute(); 
         } catch (PDOException $e) {

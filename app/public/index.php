@@ -9,6 +9,7 @@ switch ($page) {
             $controller = new DashboardController();
             $controller->dashboard();
             break;
+
         case"/view/login":
         case"/login":
             require_once "../Controllers/LoginController.php";
@@ -21,21 +22,17 @@ switch ($page) {
                 $controller->login();
             }
             break;
+
         case "/logout":
             require_once "../Controllers/LoginController.php";
             $controller = new LoginController();
             $controller->logout();
             break;
+
         case "/store":
             require_once "../Controllers/StoreController.php";
             $controller = new StoreController();
             $controller->store();
-            break;
-
-        case "/shopping-cart":
-            require_once "../Controllers/ShoppingCartController.php";
-            $controller = new ShoppingCartController();
-            $controller->shoppingCart();
             break;
     
         case '/book-management':
@@ -43,6 +40,7 @@ switch ($page) {
             $controller = new BookManagementController();
             $controller->bookManagement();
             break;
+
         case '/createBook':
             require_once "../Controllers/CreateBookController.php";
             $controller = new CreateBookController();
@@ -61,11 +59,11 @@ switch ($page) {
             $controller->store();
             break;
        
-            case (preg_match('/^\/api\/books\/deleteBook\/\d+$/', $page) ? true : false):
-                require_once "../api/BookControllerAPI.php";
-                $controller = new BookControllerAPI();
-                $controller->deleteBook();
-                break;
+        case (preg_match('/^\/api\/books\/deleteBook\/\d+$/', $page) ? true : false):
+            require_once "../api/BookControllerAPI.php";
+            $controller = new BookControllerAPI();
+            $controller->deleteBook();
+            break;
 
         case "/api/books/addBook":
             require_once "../api/BookControllerAPI.php";
@@ -80,27 +78,30 @@ switch ($page) {
             break;
 
         case "/order":
-            require_once"../controllers/OrderController.php";
+            require_once "../controllers/OrderController.php";
             $controller = new OrderController();
             $controller->order();
             break;
+
         case '/api/orders':
             require_once "../api/OrderControllerAPI.php";
             $controller = new OrderControllerAPI();
             $controller->orders();
             break;
-            case (preg_match('/^\/api\/orders\/create\/\d+$/', $page) ? true : false):
-                require_once "../api/OrderControllerAPI.php";
-                $controller = new OrderControllerAPI();
-                $controller->createOrder();
-                break;
+
+        case (preg_match('/^\/api\/orders\/create\/\d+$/', $page) ? true : false):
+            require_once "../api/OrderControllerAPI.php";
+            $controller = new OrderControllerAPI();
+            $controller->createOrder();
+            break;
+
         case (preg_match('/^\/api\/orders\/\d+$/', $page) ? true : false):
             require_once "../api/OrderControllerAPI.php";
             $controller = new OrderControllerAPI();
             $controller->customerOrders();
             break;
+
         default:
-            // Handle 404 error
             http_response_code(404);
             echo "404 Not Found";
             break;

@@ -3,7 +3,6 @@ require_once __DIR__ . '/BaseController.php';
 
 class OrderController extends BaseController
 {
-
     function __construct()
     {
 
@@ -13,7 +12,5 @@ class OrderController extends BaseController
     {
         require __DIR__ . '/../views/order.php';
     }
-
-    
 }
 ?>

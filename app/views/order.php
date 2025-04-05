@@ -4,7 +4,6 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 include __DIR__ . '/header.php';
 include __DIR__ . '/navigation-bar.php';
-
 ?>
 
 <?php if (!$isUserAdmin): ?>
@@ -22,7 +21,6 @@ include __DIR__ . '/navigation-bar.php';
 <?php if ($isUserAdmin): ?>
 <section class="container-fluid">
     <div class="container">
-        <!-- Search and Filter Section -->
         <div class="row justify-content-between">
         <div class="col-md-6 pt-5">
             <h1>Orders Overview</h1>
@@ -30,8 +28,6 @@ include __DIR__ . '/navigation-bar.php';
             <div class="col-md-6">
                 <div class="card pt-5 filter-card">
                     <div class="row justify-content-end p-0 m-0 ">
-                        <!-- Keyword Search -->
-                         
                         <div class="col-md-8">
                             <div class="form-group filtration">
                                 <input type="text" id="keywordSearch" class="form-control" 
@@ -48,7 +44,6 @@ include __DIR__ . '/navigation-bar.php';
 
 <section class="container-fluid pt-4 pb-5">
     <div class="container">
-        <!-- Orders Table -->
         <div class="table-responsive">
             <table class="table table-striped" id="ordersTable">
                 <thead class="thead-dark">
@@ -62,7 +57,6 @@ include __DIR__ . '/navigation-bar.php';
                     </tr>
                 </thead>
                 <tbody id="ordersTableBody">
-                    <!-- Orders will be inserted here by JavaScript -->
                 </tbody>
             </table>
         </div>
@@ -70,8 +64,7 @@ include __DIR__ . '/navigation-bar.php';
 </section>
 
 <script>
-    let allOrders = []; // Store all orders for filtering
-    
+    let allOrders = [];
     function loadOrders() {
         <?php if ($isUserAdmin): ?>
             // Admin can see all orders
@@ -134,16 +127,13 @@ include __DIR__ . '/navigation-bar.php';
             displayOrders(filteredOrders);
         }
 
-        // Initialize filter for admin only
         document.getElementById('keywordSearch').addEventListener('input', filterOrders);
         <?php endif; ?>
 
-    // Load orders when page loads
     loadOrders();
 </script>
 
 <style>
-    /* Style for the filter section */
     .filter-card {
         background-color: #f8f9fa;
         border: 1px solid #dee2e6;
@@ -154,14 +144,13 @@ include __DIR__ . '/navigation-bar.php';
         border: 2px solid #5D4037;
         padding: 10px;
     }
-    
+
     .form-group label {
         color: #5D4037;
         font-weight: bold;
         margin-bottom: 8px;
     }
     
-    /* Table styles */
     .table {
         margin-top: 20px;
     }

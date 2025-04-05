@@ -17,8 +17,6 @@ class BookEditController extends BaseController
         $bookId = end($parts);
         
         $book = $this->bookService->getBookById($bookId);
-        
-        // Convert Book object to array
         $bookData = [
             'book_id' => $book->getBookId(),
             'title' => $book->getTitle(),
@@ -28,7 +26,6 @@ class BookEditController extends BaseController
             'price' => $book->getPrice(),
             'image' => $book->getImageUrl()
         ];
-        
         include __DIR__ . '/../Views/edit-book.php';
     }
 

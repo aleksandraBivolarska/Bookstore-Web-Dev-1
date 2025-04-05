@@ -31,7 +31,6 @@ class Order implements JsonSerializable
         $this->quantity = $quantity;
     }
 
-    // Getter and Setter for order_id
     public function getOrderId(): int
     {
         return $this->order_id;
@@ -42,7 +41,6 @@ class Order implements JsonSerializable
         $this->order_id = $order_id;
     }
 
-    // Getter and Setter for user_id
     public function getUserId(): int
     {
         return $this->user_id;
@@ -53,7 +51,6 @@ class Order implements JsonSerializable
         $this->user_id = $user_id;
     }
 
-    // Getter and Setter for user_first_name
     public function getUserFirstName(): string
     {
         return $this->user_first_name;
@@ -64,7 +61,6 @@ class Order implements JsonSerializable
         $this->user_first_name = $user_first_name;
     }
 
-    // Getter and Setter for user_last_name
     public function getUserLastName(): string
     {
         return $this->user_last_name;
@@ -75,7 +71,6 @@ class Order implements JsonSerializable
         $this->user_last_name = $user_last_name;
     }
 
-    // Getter and Setter for book_id
     public function getBookId(): int
     {
         return $this->book_id;
@@ -86,7 +81,6 @@ class Order implements JsonSerializable
         $this->book_id = $book_id;
     }
 
-    // Getter and Setter for book_title
     public function getBookTitle(): string
     {
         return $this->book_title;
@@ -97,7 +91,6 @@ class Order implements JsonSerializable
         $this->book_title = $book_title;
     }
 
-    // Getter and Setter for book_author
     public function getBookAuthor(): string
     {
         return $this->book_author;
@@ -108,7 +101,6 @@ class Order implements JsonSerializable
         $this->book_author = $book_author;
     }
 
-    // Getter and Setter for quantity
     public function getQuantity(): int
     {
         return $this->quantity;

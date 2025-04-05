@@ -28,7 +28,6 @@ class Book implements JsonSerializable
         $this->image = $image;
     }
 
-    // Getter and Setter for book_id
     public function getBookId(): int
     {
         return $this->book_id;
@@ -39,7 +38,6 @@ class Book implements JsonSerializable
         $this->book_id = $book_id;
     }
 
-    // Getter and Setter for title
     public function getTitle(): string
     {
         return $this->title;
@@ -49,8 +47,6 @@ class Book implements JsonSerializable
     {
         $this->title = $title;
     }
-
-    // Getter and Setter for author
     public function getAuthor(): string
     {
         return $this->author;
@@ -60,8 +56,6 @@ class Book implements JsonSerializable
     {
         $this->author = $author;
     }
-
-    // Getter and Setter for genre
     public function getGenre(): string
     {
         return $this->genre;
@@ -72,20 +66,15 @@ class Book implements JsonSerializable
         $this->genre = $genre;
     }
 
-    
-
-    // Getter and Setter for stock
     public function getStock(): int
     {
         return $this->stock;
     }
-
     public function setStock(int $stock): void
     {
         $this->stock = $stock;
     }
 
-    // Getter and Setter for price
     public function getPrice(): float
     {
         return $this->price;

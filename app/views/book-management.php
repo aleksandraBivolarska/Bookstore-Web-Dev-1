@@ -34,7 +34,7 @@ include __DIR__ . '/navigation-bar.php';
 
 <style>
     .custom-header {
-        background-color: #5D4037 !important; /* Dark brown */
+        background-color: #5D4037 !important;
     }
 
     .table tbody tr {
@@ -44,7 +44,7 @@ include __DIR__ . '/navigation-bar.php';
 
     .table tbody tr td, 
     .table tbody tr th {
-        vertical-align: middle !important; /* Align text in the middle */
+        vertical-align: middle !important;
     }
 </style>
 
@@ -52,7 +52,7 @@ include __DIR__ . '/navigation-bar.php';
 
 <script>
     function loadBooks() {
-        fetch('/api/books') // Ensure this endpoint returns JSON
+        fetch('/api/books') 
             .then(response => response.json())
             .then(books => {
                 books.forEach(book => {
@@ -65,7 +65,6 @@ include __DIR__ . '/navigation-bar.php';
     function appendBook(book) {
         const newRow = document.createElement("tr");
 
-        // Create the cells for each column
         const idCol = document.createElement("th");
         const titleCol = document.createElement("td");
         const authorCol = document.createElement("td");
@@ -73,40 +72,33 @@ include __DIR__ . '/navigation-bar.php';
         const availabilityCol = document.createElement("td");
         const priceCol = document.createElement("td");
 
-        // Set the content for each column
         idCol.scope = "row";
         idCol.innerText = `${book.book_id}`;
         titleCol.innerText = book.title;
         authorCol.innerText = book.author;
         genreCol.innerText = book.genre;
-        availabilityCol.innerText = `${book.stock}`; // Assuming 'availability' is a boolean
+        availabilityCol.innerText = `${book.stock}`;
         priceCol.innerText = `€${book.price}`;
 
-        // Create the Actions column and apply styles
         const actionsCol = document.createElement("td");
         actionsCol.style.display = "flex";
         actionsCol.style.alignItems = "stretch";
         actionsCol.style.justifyContent = "center";
-        actionsCol.style.gap = "15px"; // Add some spacing between buttons
+        actionsCol.style.gap = "15px"; 
 
-        // Create Edit button
-        // Update the edit button creation in appendBook()
         const editButton = document.createElement("a");
         editButton.classList.add("btn", "btn-primary", "mr-2");
         editButton.style.flex = "1";
         editButton.style.width = "20px";
-        editButton.href = `/editBook/${book.book_id}`; // Link to edit page with ID
+        editButton.href = `/editBook/${book.book_id}`; 
         editButton.innerHTML = ` 
             <svg class="feather feather-edit" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
                 <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
             </svg>
         `;
-
         editButton.href = `/editBook/${book.book_id}`;
 
-
-        // In your appendBook function, modify the delete button creation:
         const deleteButton = document.createElement("button");
         deleteButton.classList.add("btn", "btn-danger");
         deleteButton.style.flex = "1";
@@ -116,7 +108,6 @@ include __DIR__ . '/navigation-bar.php';
             </svg>
         `;
 
-        // Add click event handler
         deleteButton.addEventListener('click', async () => {
                 try {
                     
@@ -128,7 +119,7 @@ include __DIR__ . '/navigation-bar.php';
                     });
                     
                     if (response.ok) {
-                        newRow.remove(); // Remove the row from the table
+                        newRow.remove(); 
                     } else {
                         console.error('Failed to delete book');
                     }
@@ -138,21 +129,16 @@ include __DIR__ . '/navigation-bar.php';
             
         });
 
-
-        // Append the buttons to the Actions column
         actionsCol.appendChild(editButton);
         actionsCol.appendChild(deleteButton);
 
-        // Append all columns to the row
         newRow.appendChild(idCol);
         newRow.appendChild(titleCol);
         newRow.appendChild(authorCol);
         newRow.appendChild(genreCol);
         newRow.appendChild(availabilityCol);
         newRow.appendChild(priceCol);
-        newRow.appendChild(actionsCol);  // Append the actions column with buttons
-
-        // Append the row to the table body
+        newRow.appendChild(actionsCol); 
         document.getElementById("bookTable").appendChild(newRow);
     }
 

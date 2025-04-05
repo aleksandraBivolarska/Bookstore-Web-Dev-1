@@ -7,7 +7,6 @@ require_once '../models/user.php';
 $isUserAdmin = false;
 
 if (isset($_SESSION['user'])) {
-    // Unserialize the session data into an object
     $user = unserialize($_SESSION['user']);
     $userRole = $user['role'];
     $userId = $user['user_id'];
@@ -70,16 +69,11 @@ if (isset($_SESSION['user'])) {
 
 <script>
   function handleLogout() {
-    // Clear the cart from localStorage
     localStorage.removeItem('cart');
-    // You might also want to update the cart count display if it exists
     if (typeof updateCartCount === 'function') {
         updateCartCount();
     }
-    // Proceed with the normal logout process
-    return true; // Allow the link to proceed
+    return true;
   }
 
-  
-  
 </script>
