@@ -47,6 +47,7 @@ include __DIR__ . '/navigation-bar.php';
     }
 </style>
 
+
 <script>
     function loadBooks() {
         fetch('/api/books') 

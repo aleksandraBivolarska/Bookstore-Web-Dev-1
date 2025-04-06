@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Apr 05, 2025 at 08:21 PM
+-- Generation Time: Apr 06, 2025 at 12:18 PM
 -- Server version: 10.9.4-MariaDB-1:10.9.4+maria~ubu2204
 -- PHP Version: 8.0.25
 
@@ -44,14 +44,16 @@ CREATE TABLE `book` (
 --
 
 INSERT INTO `book` (`book_id`, `title`, `author`, `genre`, `stock`, `price`, `image`) VALUES
-(1, 'A Game of Thrones', 'George R.R. Martin', 'Fiction', 11, '10.49', 'https://m.media-amazon.com/images/I/81xf7GKNKTL.jpg'),
+(1, 'A Game of Thrones', 'George R.R. Martin', 'Fiction', 10, '10.49', 'https://m.media-amazon.com/images/I/81xf7GKNKTL.jpg'),
 (2, 'Dune', 'Frank Herbert', 'Fiction', 1, '9.99', 'https://m.media-amazon.com/images/I/71oO1E-XPuL._AC_UF1000,1000_QL80_.jpg'),
-(3, 'The Girl with the Dragon Tattoo', 'Stieg Larsson', 'Other', 0, '9.99', 'https://images.penguinrandomhouse.com/cover/9780307454546'),
+(3, 'The Girl with the Dragon Tattoo', 'Stieg Larsson', 'Mystery', 0, '9.99', 'https://images.penguinrandomhouse.com/cover/9780307454546'),
 (4, 'Pride and Prejudice', 'Jane Austen', 'Romance', 6, '14.00', 'https://images.penguinrandomhouse.com/cover/9780593622452'),
-(5, 'The Shining', 'Stephen King', 'Other', 5, '9.99', 'https://m.media-amazon.com/images/I/81IMi+0fyJL._UF1000,1000_QL80_.jpg'),
-(6, 'The Hunger Games', 'Suzanne Collins', 'Fantasy', 5, '9.79', 'https://www.worldofbooks.com/cdn/shop/files/1407132083.jpg?v=1718312249'),
+(5, 'The Shining', 'Stephen King', 'Other', 1, '9.99', 'https://m.media-amazon.com/images/I/81IMi+0fyJL._UF1000,1000_QL80_.jpg'),
+(6, 'The Hunger Games', 'Suzanne Collins', 'Fantasy', 11, '9.79', 'https://www.worldofbooks.com/cdn/shop/files/1407132083.jpg?v=1718312249'),
 (14, 'Alice in Wonderland', 'Lewis Carroll', 'Fantasy', 39, '12.00', 'https://www.gutenberg.org/files/11/11-h/images/cover.jpg'),
-(16, 'Meow: A Novel', 'Sam Austen', 'Fantasy', 8, '13.21', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVEA0rkb3DFu6xgDJNUmX9Y1fEs1YjlAU8BRJbLpne_1kOVVzL');
+(16, 'Meow: A Novel', 'Sam Austen', 'Science Fiction', 7, '13.21', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVEA0rkb3DFu6xgDJNUmX9Y1fEs1YjlAU8BRJbLpne_1kOVVzL'),
+(24, 'The Diary of a Young Girl', 'Anne Frank', 'Biography', 3, '10.99', 'https://cdn.kobo.com/book-images/1131b4f6-dc54-4f46-aadc-43d57e27f16f/1200/1200/False/the-diary-of-anne-frank-7.jpg'),
+(25, 'John Adams', 'David McCullough', 'History', 11, '8.99', 'https://m.media-amazon.com/images/I/71wLn1zZBrL._AC_UF894,1000_QL80_.jpg');
 
 -- --------------------------------------------------------
 
@@ -135,13 +137,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `book`
 --
 ALTER TABLE `book`
-  MODIFY `book_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `book_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `order_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `order_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `user`
